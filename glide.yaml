@@ -3,17 +3,23 @@ import:
 
 # kube
 - package: k8s.io/apimachinery
-  version: kubernetes-1.11.1
+  repo:    https://github.com/openshift/kubernetes-apimachinery.git
+  version: origin-4.0-kubernetes-1.11.1
 - package: k8s.io/api
-  version: kubernetes-1.11.1
+  repo:    https://github.com/openshift/kubernetes-api.git
+  version: origin-4.0-kubernetes-1.11.1
 - package: k8s.io/apiserver
-  version: kubernetes-1.11.1
+  repo:    https://github.com/openshift/kubernetes-apiserver.git
+  version: origin-4.0-kubernetes-1.11.1
 - package: k8s.io/client-go
-  version: kubernetes-1.11.1
+  repo:    https://github.com/openshift/kubernetes-client-go.git
+  version: origin-4.0-kubernetes-1.11.1
 - package: k8s.io/kube-aggregator
-  version: kubernetes-1.11.1
+  repo:    https://github.com/openshift/kubernetes-kube-aggregator.git
+  version: origin-4.0-kubernetes-1.11.1
 - package: k8s.io/code-generator
-  version: kubernetes-1.11.1
+  repo:    https://github.com/openshift/kubernetes-code-generator.git
+  version: origin-4.0-kubernetes-1.11.1
 
 # openshift
 - package: github.com/openshift/api
