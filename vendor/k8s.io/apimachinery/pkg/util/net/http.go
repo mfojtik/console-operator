@@ -91,8 +91,7 @@ func SetOldTransportDefaults(t *http.Transport) *http.Transport {
 		// ProxierWithNoProxyCIDR allows CIDR rules in NO_PROXY
 		t.Proxy = NewProxierWithNoProxyCIDR(http.ProxyFromEnvironment)
 	}
-	// If no custom dialer is set, use the default context dialer
-	if t.DialContext == nil && t.Dial == nil {
+	if t.DialContext == nil {
 		t.DialContext = defaultTransport.DialContext
 	}
 	if t.TLSHandshakeTimeout == 0 {
@@ -130,18 +129,7 @@ func DialerFor(transport http.RoundTripper) (DialFunc, error) {
 
 	switch transport := transport.(type) {
 	case *http.Transport:
-		// transport.DialContext takes precedence over transport.Dial
-		if transport.DialContext != nil {
-			return transport.DialContext, nil
-		}
-		// adapt transport.Dial to the DialWithContext signature
-		if transport.Dial != nil {
-			return func(ctx context.Context, net, addr string) (net.Conn, error) {
-				return transport.Dial(net, addr)
-			}, nil
-		}
-		// otherwise return nil
-		return nil, nil
+		return transport.DialContext, nil
 	case RoundTripperWrapper:
 		return DialerFor(transport.WrappedRoundTripper())
 	default:

@@ -1,35 +1,29 @@
 package: github.com/openshift/console-operator
 import:
-
-# kube
 - package: k8s.io/apimachinery
-  repo:    https://github.com/openshift/kubernetes-apimachinery.git
-  version: origin-4.0-kubernetes-1.11.1
+  version: kubernetes-1.11.0
 - package: k8s.io/api
-  repo:    https://github.com/openshift/kubernetes-api.git
-  version: origin-4.0-kubernetes-1.11.1
+  version: kubernetes-1.11.0
 - package: k8s.io/apiserver
-  repo:    https://github.com/openshift/kubernetes-apiserver.git
-  version: origin-4.0-kubernetes-1.11.1
+  version: kubernetes-1.11.0
 - package: k8s.io/client-go
-  repo:    https://github.com/openshift/kubernetes-client-go.git
-  version: origin-4.0-kubernetes-1.11.1
+  version: kubernetes-1.11.0
 - package: k8s.io/kube-aggregator
-  repo:    https://github.com/openshift/kubernetes-kube-aggregator.git
-  version: origin-4.0-kubernetes-1.11.1
+  version: kubernetes-1.11.0
 - package: k8s.io/code-generator
-  repo:    https://github.com/openshift/kubernetes-code-generator.git
-  version: origin-4.0-kubernetes-1.11.1
-
-# openshift
+  version: kubernetes-1.11.0
+- package: k8s.io/apiextensions-apiserver
+  version: kubernetes-1.11.0
 - package: github.com/openshift/api
   version: master
 - package: github.com/openshift/client-go
   version: master
 - package: github.com/openshift/library-go
   version: master
-
-# codegen
+- package: github.com/jteeuwen/go-bindata
+  version: a0ff2567cfb70903282db057e799fd826784d41d
 - package: k8s.io/gengo/args
   version: 01a732e01d00cb9a81bb0ca050d3e6d2b947927b
+- package: github.com/golang/glog
+  version: 44145f04b68cf362d9c4df2182967c2275eaefed
 - package: golang.org/x/tools/imports

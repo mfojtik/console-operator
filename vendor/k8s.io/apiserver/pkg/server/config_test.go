@@ -101,7 +101,6 @@ func TestNewWithDelegate(t *testing.T) {
     "/foo",
     "/healthz",
     "/healthz/delegate-health",
-    "/healthz/log",
     "/healthz/ping",
     "/healthz/poststarthook/delegate-post-start-hook",
     "/healthz/poststarthook/generic-apiserver-start-informers",
@@ -112,7 +111,6 @@ func TestNewWithDelegate(t *testing.T) {
   ]
 }`, t)
 	checkPath(server.URL+"/healthz", http.StatusInternalServerError, `[+]ping ok
-[+]log ok
 [-]wrapping-health failed: reason withheld
 [-]delegate-health failed: reason withheld
 [+]poststarthook/generic-apiserver-start-informers ok
