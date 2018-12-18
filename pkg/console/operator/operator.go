@@ -7,6 +7,7 @@ import (
 
 	// 3rd party
 	"github.com/blang/semver"
+	"github.com/openshift/library-go/pkg/operator/events"
 	"github.com/sirupsen/logrus"
 
 	// kube
@@ -73,6 +74,7 @@ func NewConsoleOperator(
 	deploymentClient appsv1.DeploymentsGetter,
 	routev1Client routeclientv1.RoutesGetter,
 	oauthv1Client oauthclientv1.OAuthClientsGetter,
+	recorder events.Recorder,
 ) *ConsoleOperator {
 	c := &ConsoleOperator{
 		// operator
@@ -85,6 +87,7 @@ func NewConsoleOperator(
 		// openshift
 		routeClient: routev1Client,
 		oauthClient: oauthv1Client,
+		recorder: recorder,
 	}
 
 	operatorInformer := consoles.Informer()
@@ -148,6 +151,7 @@ type ConsoleOperator struct {
 	// openshift
 	routeClient routeclientv1.RoutesGetter
 	oauthClient oauthclientv1.OAuthClientsGetter
+	recorder events.Recorder
 	// controller
 	controller *controller.Controller
 }
@@ -226,7 +230,7 @@ func (c *ConsoleOperator) sync(key interface{}) error {
 	switch {
 	// v4.0.0 or nil
 	case v311_to_401.BetweenOrEmpty(currentActualVersion):
-		outConfig, configChanged, err = sync_v400(c, outConfig)
+		outConfig, configChanged, err = sync_v400(c, c.recorder, outConfig)
 		errs = append(errs, err)
 		if err == nil {
 			outConfig.Status.TaskSummary = "sync-4.0.0"
